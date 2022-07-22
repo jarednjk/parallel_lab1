@@ -1,0 +1,22 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each posters}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.cost}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{/block}}
+{{/extends}}
