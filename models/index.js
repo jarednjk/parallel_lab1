@@ -4,7 +4,27 @@ const bookshelf = require("../bookshelf");
 
 // the name of the model (t)
 const Poster = bookshelf.model('Poster', {
-    tableName: 'posters'
+    tableName: 'posters',
+    category() {
+        return this.belongsTo('Category')
+    },
+    tags() {
+        return this.belongsToMany('Tag');
+    }
 })
 
-module.exports = { Poster };
+const Category = bookshelf.model('Category', {
+    tableName: 'categories',
+    posters() {
+        return this.hasMany('Poster')
+    }
+})
+
+const Tag = bookshelf.model('Tag', {
+    tableName: 'tags',
+    posters() {
+        return this.belongsToMany('Poster')
+    }
+})
+
+module.exports = { Poster, Category, Tag };
