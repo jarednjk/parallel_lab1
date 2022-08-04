@@ -15,16 +15,14 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  return db.createTable('users', {
-    id: {type: 'int', primaryKey: true, autoIncrement: true},
-    username: {type: 'string', length: 100},
-    email: {type: 'string', length: 320},
-    password: {type: 'string', length: 80}
+  return db.addColumn('posters', 'image_url', {
+    type: 'string',
+    length: 255
   });
 };
 
 exports.down = function(db) {
-  return db.dropTable('users');
+  return null;
 };
 
 exports._meta = {

@@ -1,5 +1,9 @@
 {{#extends 'base'}}
 {{#block 'content'}}
+<form method="GET">
+    {{{form}}}
+    <input type="submit" class="mb-3 mt-3 btn btn-primary" value="Search"/>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -8,6 +12,7 @@
             <th>Cost</th>
             <th>Category</th>
             <th>Tags</th>
+            <th>Image</th>
             <th></th>
         </tr>
     </thead>
@@ -18,8 +23,14 @@
                 <td>{{this.description}}</td>
                 <td>{{this.cost}}</td>
                 <td>{{this.category.name}}</td>
-                <td>{{#each this.tags}}<span>{{this.name}}</span>{{/each}}</td>
                 <td>
+                    {{#each this.tags}}<span>{{this.name}}</span>{{/each}}
+                </td>
+                <td>
+                    <img src="{{this.thumbnail_url}}" class="img-fluid"/>
+                </td>
+                <td>
+                    <a href="/cart/{{this.id}}/add" class="btn btn-success btn-sm">Add to cart</a>
                     <a href="/posters/{{this.id}}/update" class="btn btn-primary btn-sm">Update</a>
                     <a href="/posters/{{this.id}}/delete" class="btn btn-danger btn-sm">Delete</a>
                 </td>

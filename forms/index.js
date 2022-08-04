@@ -50,8 +50,82 @@ const createPosterForm = (categories, tags) => {
             errorAfterField: true,
             widget: widgets.multipleSelect(),
             choices: tags
+        }),
+        'image_url': fields.string({
+            widget: widgets.hidden()
+        }),
+        'thumbnail_url': fields.string({
+            widget: widgets.hidden()
         })
     })
 }
 
-module.exports = {createPosterForm, bootstrapField};
+const createRegistrationForm = () => {
+    return forms.create({
+        'username': fields.string({
+            required: true,
+            errorAfterField: true
+        }),
+        'email': fields.string({
+            required: true,
+            errorAfterField: true
+        }),
+        'password': fields.password({
+            required: true,
+            errorAfterField: true
+        }),
+        'confirm_password': fields.password({
+            required: true,
+            errorAfterField: true,
+            validators: [validators.matchField('password')]
+        })
+    })
+}
+
+const createLoginForm = () => {
+    return forms.create({
+        'email': fields.string({
+            required: true,
+            errorAfterField: true,
+        }),
+        'password': fields.password({
+            required: true,
+            errorAfterField: true,
+        })
+    })
+}
+
+const createSearchForm = (categories, tags) => {
+    return forms.create({
+        'name': fields.string({
+            required: false,
+            errorAfterField: true,
+        }),
+        'min_cost': fields.string({
+            required: false,
+            errorAfterField: true,
+            'validators': [validators.integer()]
+        }),
+        'max_cost': fields.string({
+            required: false,
+            errorAfterField: true,
+            validators: [validators.integer()]
+        }),
+        'category_id': fields.string({
+            label: 'Category',
+            required: false,
+            errorAfterField: true,
+            widget: widgets.select(),
+            choices: categories
+        }),
+        'tags': fields.string({
+            required: false,
+            errorAfterField: true,
+            widget: widgets.multipleSelect(),
+            choices: tags
+        })
+
+    })
+}
+
+module.exports = {createPosterForm, createRegistrationForm, createLoginForm, createSearchForm, bootstrapField};
